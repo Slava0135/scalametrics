@@ -11,8 +11,13 @@ class WeightedMethodsTest extends AnyFunSuite {
     Source.fromResource(s"metrics/WeightedMethods/$name.scala").getLines().mkString("\n")
   }
 
-  test("WeightedMethods.evaluate") {
+  test("WeightedMethods.evaluate.NoMethods") {
     val source = readSource("NoMethods")
     assert(WeightedMethods.evaluate(source) === 0)
+  }
+
+  test("WeightedMethods.evaluate.OneMethod") {
+    val source = readSource("OneMethod")
+    assert(WeightedMethods.evaluate(source) === 1)
   }
 }

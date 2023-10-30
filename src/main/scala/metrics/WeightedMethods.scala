@@ -4,14 +4,20 @@ package metrics
 import scala.meta.{Defn, Source, XtensionParseInputLike}
 
 object WeightedMethods {
-  def evaluate(source: String): Int = {
+  def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
-    var count = 0
+    println(tree.structure)
+    var classCount = 0
+    var methodCount = 0
     tree.traverse {
-      case _: Defn.Def =>
-        count += 1
+      case cls: Defn.Class =>
+        classCount += 1
+        cls.traverse {
+          case _: Defn.Def =>
+            methodCount += 1
+        }
     }
-    count
+    methodCount / classCount
   }
 }
 

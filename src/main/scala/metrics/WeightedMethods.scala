@@ -17,7 +17,7 @@ object WeightedMethods {
             methodCount += 1
         }
     }
-    methodCount / classCount
+    methodCount.toDouble / classCount.toDouble
   }
 }
 

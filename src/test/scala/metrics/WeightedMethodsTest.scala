@@ -25,4 +25,9 @@ class WeightedMethodsTest extends AnyFunSuite {
     val source = readSource("TwoClasses")
     assert(WeightedMethods.evaluate(source) === 1.0)
   }
+
+  test("WeightedMethods.evaluate.ManyMethodsManyClasses") {
+    val source = readSource("ManyMethodsManyClasses")
+    assert(WeightedMethods.evaluate(source) === 6.0/4.0)
+  }
 }

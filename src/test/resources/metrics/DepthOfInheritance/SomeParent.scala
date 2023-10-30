@@ -1,0 +1,2 @@
+class SomeParent extends Something {
+}

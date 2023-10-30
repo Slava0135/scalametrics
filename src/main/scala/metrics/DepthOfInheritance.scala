@@ -7,28 +7,38 @@ import scala.meta.{Defn, Source, Type, XtensionParseInputLike}
 object DepthOfInheritance {
   def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
-    println(tree.structure)
     var classCount = 0
-    var depthSum = 0
-    val classDepth = new mutable.HashMap[String, Int]
+    val classParent = new mutable.HashMap[String, Option[String]]
     tree.traverse {
       case cls: Defn.Class =>
         classCount += 1
         val parents = cls.templ.inits
-        var depth = 0
         if (parents.isEmpty) {
-          depth = 1
+          classParent.put(cls.name.value, Option.empty)
         } else {
-          parents.foreach { elem =>
-            elem.traverse {
-              case name: Type.Name =>
-                depth += classDepth.getOrElse(name.value, 1) + 1
-            }
+          parents.head.traverse {
+            case name: Type.Name =>
+              classParent.put(cls.name.value, Option.apply(name.value))
           }
         }
-        depthSum += depth
-        classDepth.put(cls.name.value, depth)
     }
+    val classDepth = new mutable.HashMap[String, Int]
+    val updateQueue = new mutable.Queue[String]
+    updateQueue.addAll(classParent.keys)
+    while (updateQueue.nonEmpty) {
+      val next = updateQueue.dequeue()
+      classParent.get(next) match {
+        case Some(None) =>
+          classDepth.put(next, 1)
+        case Some(Some(parent)) if !classParent.contains(parent) =>
+          classDepth.put(next, 2)
+        case Some(Some(parent)) if !classDepth.contains(parent) =>
+          updateQueue.enqueue(next)
+        case Some(Some(parent)) =>
+          classDepth.put(next, classDepth(parent) + 1)
+      }
+    }
+    val depthSum = classDepth.values.sum
     depthSum.toDouble / classCount.toDouble
   }
 }

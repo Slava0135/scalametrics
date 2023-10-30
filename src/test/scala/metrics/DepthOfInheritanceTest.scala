@@ -25,4 +25,9 @@ class DepthOfInheritanceTest extends AnyFunSuite {
     val source = readSource("ThreeClasses")
     assert(DepthOfInheritance.evaluate(source) === 6.0/3.0)
   }
+
+  test("DepthOfInheritance.evaluate.ThreeClassesReversed") {
+    val source = readSource("ThreeClassesReversed")
+    assert(DepthOfInheritance.evaluate(source) === 6.0 / 3.0)
+  }
 }

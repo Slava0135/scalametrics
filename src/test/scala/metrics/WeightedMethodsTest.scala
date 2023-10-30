@@ -3,8 +3,11 @@ package metrics
 
 import org.scalatest.funsuite.AnyFunSuite
 
+import scala.io.Source
+
 class WeightedMethodsTest extends AnyFunSuite {
-  test("WeightedMethods.cube") {
-    assert(WeightedMethods.cube(3) === 27)
+  test("WeightedMethods.evaluate") {
+    val source = Source.fromResource("metrics/WeightedMethods/NoMethods.scala").getLines().mkString("\n")
+    assert(WeightedMethods.evaluate(source) === 0)
   }
 }

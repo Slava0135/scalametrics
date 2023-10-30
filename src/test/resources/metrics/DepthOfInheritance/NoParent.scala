@@ -1,2 +1,1 @@
-class NoParent {
-}
+class NoParent

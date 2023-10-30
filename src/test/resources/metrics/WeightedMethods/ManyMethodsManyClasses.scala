@@ -1,5 +1,4 @@
-class Zero {
-}
+class Zero
 
 class One {
   def one() = 1

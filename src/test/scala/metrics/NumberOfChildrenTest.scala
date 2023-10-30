@@ -15,4 +15,9 @@ class NumberOfChildrenTest extends AnyFunSuite {
     val source = readSource("NoChildren")
     assert(NumberOfChildren.evaluate(source) === 0.0)
   }
+
+  test("NumberOfChildren.evaluate.OneChild") {
+    val source = readSource("OneChild")
+    assert(NumberOfChildren.evaluate(source) === 0.5)
+  }
 }

@@ -27,4 +27,9 @@ class CouplingBetweenObjectsTest extends AnyFunSuite {
     val source = readSource("TwoClassesManyUses")
     CouplingBetweenObjects.evaluate(source) shouldEqual 0.5 +- 0.001
   }
+
+  test("CouplingBetweenObjects.evaluate.PackagedClasses") {
+    val source = readSource("PackagedClasses")
+    CouplingBetweenObjects.evaluate(source) shouldEqual 2.0 / 3.0 +- 0.001
+  }
 }

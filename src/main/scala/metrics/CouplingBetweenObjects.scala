@@ -19,9 +19,21 @@ object CouplingBetweenObjects {
     for (cls <- classes) {
       val uses = new mutable.HashSet[String]
       cls._2.traverse {
-        case other: Type.Name if other.value != cls._1 && classes.contains(other.value) && !uses.contains(other.value) =>
-          totalCoupled += 1
-          uses += other.value
+        case other: Type.Name if other.value != cls._1 && classes.contains(other.value) =>
+          val className = other.value
+          other.parent.get match {
+            case select: Type.Select =>
+              val classPath = select.tokens.toString()
+              if (!uses.contains(classPath)) {
+                uses += classPath
+                totalCoupled += 1
+              }
+            case _ =>
+              if (!uses.contains(className)) {
+                totalCoupled += 1
+                uses += className
+              }
+          }
       }
     }
     totalCoupled.toDouble / classCount.toDouble

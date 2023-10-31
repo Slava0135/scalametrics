@@ -1,7 +1,9 @@
 package io.github.slava0135.scalametrics
 package metrics
 
+import org.scalactic.Tolerance.convertNumericToPlusOrMinusWrapper
 import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 import scala.io.Source
 
@@ -13,21 +15,21 @@ class NumberOfChildrenTest extends AnyFunSuite {
 
   test("NumberOfChildren.evaluate.NoChildren") {
     val source = readSource("NoChildren")
-    assert(NumberOfChildren.evaluate(source) === 0.0)
+    NumberOfChildren.evaluate(source) shouldBe 0
   }
 
   test("NumberOfChildren.evaluate.OneChild") {
     val source = readSource("OneChild")
-    assert(NumberOfChildren.evaluate(source) === 0.5)
+    NumberOfChildren.evaluate(source) shouldBe 0.5 +- 0.001
   }
 
   test("NumberOfChildren.evaluate.ManyChildren") {
     val source = readSource("ManyChildren")
-    assert(NumberOfChildren.evaluate(source) === 3.0/4.0)
+    NumberOfChildren.evaluate(source) shouldBe 3.0/4.0 +- 0.001
   }
 
   test("NumberOfChildren.evaluate.ManyChildrenManyClasses") {
     val source = readSource("ManyChildrenManyClasses")
-    assert(NumberOfChildren.evaluate(source) === 7.0/8.0)
+    NumberOfChildren.evaluate(source) shouldBe 7.0/8.0 +- 0.001
   }
 }

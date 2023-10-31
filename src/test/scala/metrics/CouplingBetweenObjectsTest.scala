@@ -2,6 +2,7 @@ package io.github.slava0135.scalametrics
 package metrics
 
 import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 import scala.io.Source
 
@@ -13,6 +14,6 @@ class CouplingBetweenObjectsTest extends AnyFunSuite {
 
   test("CouplingBetweenObjects.evaluate.OneClass") {
     val source = readSource("OneClass")
-    assert(CouplingBetweenObjects.evaluate(source) === 0.0)
+    CouplingBetweenObjects.evaluate(source) shouldBe 0
   }
 }

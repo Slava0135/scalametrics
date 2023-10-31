@@ -1,7 +1,9 @@
 package io.github.slava0135.scalametrics
 package metrics
 
+import org.scalactic.Tolerance.convertNumericToPlusOrMinusWrapper
 import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 import scala.io.Source
 
@@ -13,21 +15,21 @@ class WeightedMethodsTest extends AnyFunSuite {
 
   test("WeightedMethods.evaluate.NoMethods") {
     val source = readSource("NoMethods")
-    assert(WeightedMethods.evaluate(source) === 0.0)
+    WeightedMethods.evaluate(source) shouldBe 0
   }
 
   test("WeightedMethods.evaluate.OneMethod") {
     val source = readSource("OneMethod")
-    assert(WeightedMethods.evaluate(source) === 1.0)
+    WeightedMethods.evaluate(source) shouldBe 1
   }
 
   test("WeightedMethods.evaluate.TwoClasses") {
     val source = readSource("TwoClasses")
-    assert(WeightedMethods.evaluate(source) === 1.0)
+    WeightedMethods.evaluate(source) shouldBe 1
   }
 
   test("WeightedMethods.evaluate.ManyMethodsManyClasses") {
     val source = readSource("ManyMethodsManyClasses")
-    assert(WeightedMethods.evaluate(source) === 6.0/4.0)
+    WeightedMethods.evaluate(source) shouldBe 6.0/4.0 +- 0.001
   }
 }

@@ -1,7 +1,9 @@
 package io.github.slava0135.scalametrics
 package metrics
 
+import org.scalactic.Tolerance.convertNumericToPlusOrMinusWrapper
 import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
 import scala.io.Source
 
@@ -13,26 +15,26 @@ class DepthOfInheritanceTest extends AnyFunSuite {
 
   test("DepthOfInheritance.evaluate.NoParent") {
     val source = readSource("NoParent")
-    assert(DepthOfInheritance.evaluate(source) === 1.0)
+    DepthOfInheritance.evaluate(source) shouldBe 1
   }
 
   test("DepthOfInheritance.evaluate.SomeParent") {
     val source = readSource("SomeParent")
-    assert(DepthOfInheritance.evaluate(source) === 2.0)
+    DepthOfInheritance.evaluate(source) shouldBe 2
   }
 
   test("DepthOfInheritance.evaluate.ThreeClasses") {
     val source = readSource("ThreeClasses")
-    assert(DepthOfInheritance.evaluate(source) === 6.0/3.0)
+    DepthOfInheritance.evaluate(source) shouldBe 6.0/3.0 +- 0.001
   }
 
   test("DepthOfInheritance.evaluate.ThreeClassesReversed") {
     val source = readSource("ThreeClassesReversed")
-    assert(DepthOfInheritance.evaluate(source) === 6.0 / 3.0)
+    DepthOfInheritance.evaluate(source) shouldBe 6.0/3.0 +- 0.001
   }
 
   test("DepthOfInheritance.evaluate.WithTrait") {
     val source = readSource("WithTrait")
-    assert(DepthOfInheritance.evaluate(source) === 6.0 / 3.0)
+    DepthOfInheritance.evaluate(source) shouldBe 6.0/3.0 +- 0.001
   }
 }

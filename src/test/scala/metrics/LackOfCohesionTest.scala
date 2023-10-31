@@ -19,6 +19,11 @@ class LackOfCohesionTest extends AnyFunSuite {
 
   test("LackOfCohesion.evaluate.TwoMethodsTwoVars") {
     val source = readSource("TwoMethodsTwoVars")
-    LackOfCohesion.evaluate(source) shouldEqual 2
+    LackOfCohesion.evaluate(source) shouldEqual 1
+  }
+
+  test("LackOfCohesion.evaluate.TwoMethodsOneVar") {
+    val source = readSource("TwoMethodsOneVar")
+    LackOfCohesion.evaluate(source) shouldEqual 0
   }
 }

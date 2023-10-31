@@ -1,6 +1,7 @@
 package io.github.slava0135.scalametrics
 package metrics
 
+import org.scalactic.Tolerance.convertNumericToPlusOrMinusWrapper
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
@@ -14,6 +15,11 @@ class CouplingBetweenObjectsTest extends AnyFunSuite {
 
   test("CouplingBetweenObjects.evaluate.OneClass") {
     val source = readSource("OneClass")
-    CouplingBetweenObjects.evaluate(source) shouldBe 0
+    CouplingBetweenObjects.evaluate(source) shouldEqual 0
+  }
+
+  test("CouplingBetweenObjects.evaluate.TwoClasses") {
+    val source = readSource("TwoClasses")
+    CouplingBetweenObjects.evaluate(source) shouldEqual 0.5 +- 0.001
   }
 }

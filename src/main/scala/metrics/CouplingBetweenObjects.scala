@@ -7,7 +7,6 @@ import scala.meta.{Defn, Source, Type, XtensionParseInputLike}
 object CouplingBetweenObjects {
   def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
-    println(tree.structure)
     var classCount = 0
     val classes = new mutable.HashMap[String, Defn]
     tree.traverse {

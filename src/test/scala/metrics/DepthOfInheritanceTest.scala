@@ -15,26 +15,26 @@ class DepthOfInheritanceTest extends AnyFunSuite {
 
   test("DepthOfInheritance.evaluate.NoParent") {
     val source = readSource("NoParent")
-    DepthOfInheritance.evaluate(source) shouldBe 1
+    DepthOfInheritance.evaluate(source) shouldEqual 1
   }
 
   test("DepthOfInheritance.evaluate.SomeParent") {
     val source = readSource("SomeParent")
-    DepthOfInheritance.evaluate(source) shouldBe 2
+    DepthOfInheritance.evaluate(source) shouldEqual 2
   }
 
   test("DepthOfInheritance.evaluate.ThreeClasses") {
     val source = readSource("ThreeClasses")
-    DepthOfInheritance.evaluate(source) shouldBe 6.0/3.0 +- 0.001
+    DepthOfInheritance.evaluate(source) shouldEqual 6.0/3.0 +- 0.001
   }
 
   test("DepthOfInheritance.evaluate.ThreeClassesReversed") {
     val source = readSource("ThreeClassesReversed")
-    DepthOfInheritance.evaluate(source) shouldBe 6.0/3.0 +- 0.001
+    DepthOfInheritance.evaluate(source) shouldEqual 6.0/3.0 +- 0.001
   }
 
   test("DepthOfInheritance.evaluate.WithTrait") {
     val source = readSource("WithTrait")
-    DepthOfInheritance.evaluate(source) shouldBe 6.0/3.0 +- 0.001
+    DepthOfInheritance.evaluate(source) shouldEqual 6.0/3.0 +- 0.001
   }
 }

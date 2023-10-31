@@ -15,21 +15,21 @@ class WeightedMethodsTest extends AnyFunSuite {
 
   test("WeightedMethods.evaluate.NoMethods") {
     val source = readSource("NoMethods")
-    WeightedMethods.evaluate(source) shouldBe 0
+    WeightedMethods.evaluate(source) shouldEqual 0
   }
 
   test("WeightedMethods.evaluate.OneMethod") {
     val source = readSource("OneMethod")
-    WeightedMethods.evaluate(source) shouldBe 1
+    WeightedMethods.evaluate(source) shouldEqual 1
   }
 
   test("WeightedMethods.evaluate.TwoClasses") {
     val source = readSource("TwoClasses")
-    WeightedMethods.evaluate(source) shouldBe 1
+    WeightedMethods.evaluate(source) shouldEqual 1
   }
 
   test("WeightedMethods.evaluate.ManyMethodsManyClasses") {
     val source = readSource("ManyMethodsManyClasses")
-    WeightedMethods.evaluate(source) shouldBe 6.0/4.0 +- 0.001
+    WeightedMethods.evaluate(source) shouldEqual 6.0/4.0 +- 0.001
   }
 }

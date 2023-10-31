@@ -17,9 +17,11 @@ object CouplingBetweenObjects {
     }
     var totalCoupled = 0
     for (cls <- classes) {
+      val uses = new mutable.HashSet[String]
       cls._2.traverse {
-        case other: Type.Name if other.value != cls._1 && classes.contains(other.value) =>
+        case other: Type.Name if other.value != cls._1 && classes.contains(other.value) && !uses.contains(other.value) =>
           totalCoupled += 1
+          uses += other.value
       }
     }
     totalCoupled.toDouble / classCount.toDouble

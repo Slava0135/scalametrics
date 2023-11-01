@@ -11,9 +11,12 @@ object WeightedMethods {
     tree.traverse {
       case cls: Defn.Class =>
         classCount += 1
-        cls.traverse {
-          case _: Defn.Def =>
-            methodCount += 1
+        for (member <- cls.children.last.children) {
+          member match {
+            case _: Defn.Def =>
+              methodCount += 1
+            case _ =>
+          }
         }
     }
     methodCount.toDouble / classCount.toDouble

@@ -32,4 +32,9 @@ class WeightedMethodsTest extends AnyFunSuite {
     val source = readSource("ManyMethodsManyClasses")
     WeightedMethods.evaluate(source) shouldEqual 6.0/4.0 +- 0.001
   }
+
+  test("WeightedMethods.evaluate.InnerDef") {
+    val source = readSource("InnerDef")
+    WeightedMethods.evaluate(source) shouldEqual 1
+  }
 }

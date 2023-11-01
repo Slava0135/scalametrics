@@ -16,15 +16,20 @@ object LackOfCohesion {
         val vars = new mutable.HashSet[String]
         val varSets = new mutable.ArrayBuffer[mutable.HashSet[String]]
         for (member <- cls.children.last.children) {
+          def addVars(pats: List[Pat]): Unit = {
+            for (pat <- pats) {
+              pat match {
+                case varPat: Pat.Var =>
+                  vars += varPat.name.value
+                case _ =>
+              }
+            }
+          }
           member match {
             case defVal: Defn.Val =>
-              for (pat <- defVal.pats) {
-                pat match {
-                  case varPat: Pat.Var =>
-                    vars += varPat.name.value
-                  case _ =>
-                }
-              }
+              addVars(defVal.pats)
+            case defVar: Defn.Var =>
+              addVars(defVar.pats)
             case _ =>
           }
         }

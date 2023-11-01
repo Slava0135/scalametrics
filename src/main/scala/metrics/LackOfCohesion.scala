@@ -4,8 +4,9 @@ package metrics
 import scala.collection.mutable
 import scala.meta.{Defn, Pat, Source, Term, XtensionParseInputLike}
 
-object LackOfCohesion {
-  def evaluate(source: String): Double = {
+object LackOfCohesion extends Metric {
+  override def name(): String = "LCOM"
+  override def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
     var classCount = 0
     var totalScore = 0

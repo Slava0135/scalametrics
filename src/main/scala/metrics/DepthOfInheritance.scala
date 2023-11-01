@@ -4,8 +4,9 @@ package metrics
 import scala.collection.mutable
 import scala.meta.{Defn, Source, Type, XtensionParseInputLike}
 
-object DepthOfInheritance {
-  def evaluate(source: String): Double = {
+object DepthOfInheritance extends Metric {
+  override def name(): String = "DIT"
+  override def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
     var classCount = 0
     val classParent = new mutable.HashMap[String, Option[String]]

@@ -3,8 +3,9 @@ package metrics
 
 import scala.meta.{Defn, Source, XtensionParseInputLike}
 
-object WeightedMethods {
-  def evaluate(source: String): Double = {
+object WeightedMethods extends Metric {
+  override def name(): String = "WMC"
+  override def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
     var classCount = 0
     var methodCount = 0

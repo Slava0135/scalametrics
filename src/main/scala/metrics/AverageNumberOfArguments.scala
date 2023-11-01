@@ -3,8 +3,9 @@ package metrics
 
 import scala.meta.{Defn, Source, Term, XtensionParseInputLike}
 
-object AverageNumberOfArguments {
-  def evaluate(source: String): Double = {
+object AverageNumberOfArguments extends Metric {
+  override def name(): String = "ANAM"
+  override def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
     var methodParams = 0
     var methodCount = 0

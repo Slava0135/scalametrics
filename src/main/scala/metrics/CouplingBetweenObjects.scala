@@ -4,8 +4,9 @@ package metrics
 import scala.collection.mutable
 import scala.meta.{Defn, Source, Type, XtensionParseInputLike}
 
-object CouplingBetweenObjects {
-  def evaluate(source: String): Double = {
+object CouplingBetweenObjects extends Metric {
+  override def name(): String = "CBO"
+  override def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
     var classCount = 0
     val classes = new mutable.HashMap[String, Defn]

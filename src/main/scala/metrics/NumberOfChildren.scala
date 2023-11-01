@@ -4,8 +4,9 @@ package metrics
 import scala.collection.mutable
 import scala.meta.{Defn, Source, Type, XtensionParseInputLike}
 
-object NumberOfChildren {
-  def evaluate(source: String): Double = {
+object NumberOfChildren extends Metric {
+  override def name(): String = "NOC"
+  override def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
     val classChildrenN = new mutable.HashMap[String, Int]
     var classCount = 0

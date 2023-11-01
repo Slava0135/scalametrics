@@ -16,35 +16,42 @@ class LackOfCohesionTest extends AnyFunSuite {
   test("LackOfCohesion.evaluate.Empty") {
     val source = readSource("Empty")
     LackOfCohesion.evaluate(source) shouldEqual 0
+    NormLackOfCohesion.evaluate(source) shouldEqual 0
   }
 
   test("LackOfCohesion.evaluate.TwoMethodsTwoVars") {
     val source = readSource("TwoMethodsTwoVars")
     LackOfCohesion.evaluate(source) shouldEqual 1
+    NormLackOfCohesion.evaluate(source) shouldEqual 0
   }
 
   test("LackOfCohesion.evaluate.TwoMethodsOneVar") {
     val source = readSource("TwoMethodsOneVar")
     LackOfCohesion.evaluate(source) shouldEqual 0
+    NormLackOfCohesion.evaluate(source) shouldEqual 1
   }
 
   test("LackOfCohesion.evaluate.ManyMethodsManyVars") {
     val source = readSource("ManyMethodsManyVars")
     LackOfCohesion.evaluate(source) shouldEqual 1
+    NormLackOfCohesion.evaluate(source) shouldEqual 0.333 +- 0.001
   }
 
   test("LackOfCohesion.evaluate.ManyClasses") {
     val source = readSource("ManyClasses")
     LackOfCohesion.evaluate(source) shouldEqual 0.5 +- 0.001
+    NormLackOfCohesion.evaluate(source) shouldEqual 0.5 +- 0.001
   }
 
   test("LackOfCohesion.evaluate.LocalVars") {
     val source = readSource("LocalVars")
     LackOfCohesion.evaluate(source) shouldEqual 1
+    NormLackOfCohesion.evaluate(source) shouldEqual 0
   }
 
   test("LackOfCohesion.evaluate.VarAndVal") {
     val source = readSource("VarAndVal")
     LackOfCohesion.evaluate(source) shouldEqual 0
+    NormLackOfCohesion.evaluate(source) shouldEqual 1
   }
 }

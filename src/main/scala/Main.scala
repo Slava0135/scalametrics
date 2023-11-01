@@ -16,7 +16,7 @@ object Main {
     } finally {
       source.close()
     }
-    val metrics = Array(WeightedMethods, DepthOfInheritance, NumberOfChildren, CouplingBetweenObjects, LackOfCohesion, AverageNumberOfArguments)
+    val metrics = Array(WeightedMethods, DepthOfInheritance, NumberOfChildren, CouplingBetweenObjects, LackOfCohesion, NormLackOfCohesion, AverageNumberOfArguments)
     println("-- code metrics --")
     metrics.foreach { it =>
       println("%s : %.3f (avg)".format(it.name().padTo(5, " ").mkString, it.evaluate(code)))

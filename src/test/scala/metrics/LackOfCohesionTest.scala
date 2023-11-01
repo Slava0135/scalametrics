@@ -1,6 +1,7 @@
 package io.github.slava0135.scalametrics
 package metrics
 
+import org.scalactic.Tolerance.convertNumericToPlusOrMinusWrapper
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
@@ -30,5 +31,10 @@ class LackOfCohesionTest extends AnyFunSuite {
   test("LackOfCohesion.evaluate.ManyMethodsManyVars") {
     val source = readSource("ManyMethodsManyVars")
     LackOfCohesion.evaluate(source) shouldEqual 1
+  }
+
+  test("LackOfCohesion.evaluate.ManyClasses") {
+    val source = readSource("ManyClasses")
+    LackOfCohesion.evaluate(source) shouldEqual 0.5 +- 0.001
   }
 }

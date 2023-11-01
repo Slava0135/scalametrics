@@ -7,7 +7,6 @@ import scala.meta.{Defn, Pat, Source, Term, XtensionParseInputLike}
 object LackOfCohesion {
   def evaluate(source: String): Double = {
     val tree = source.parse[Source].get
-    println(tree.structure)
     var classCount = 0
     var totalScore = 0
     tree.traverse {

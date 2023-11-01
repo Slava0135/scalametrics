@@ -1,6 +1,7 @@
 package io.github.slava0135.scalametrics
 package metrics
 
+import org.scalactic.Tolerance.convertNumericToPlusOrMinusWrapper
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers.convertToAnyShouldWrapper
 
@@ -25,5 +26,10 @@ class AverageNumberOfArgumentsTest extends AnyFunSuite {
   test("AverageNumberOfArguments.evaluate.OneMethodManyArgs") {
     val source = readSource("OneMethodManyArgs")
     AverageNumberOfArguments.evaluate(source) shouldEqual 3
+  }
+
+  test("AverageNumberOfArguments.evaluate.TwoMethods") {
+    val source = readSource("TwoMethods")
+    AverageNumberOfArguments.evaluate(source) shouldEqual 1
   }
 }

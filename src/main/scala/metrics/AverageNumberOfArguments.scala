@@ -8,13 +8,19 @@ object AverageNumberOfArguments {
     val tree = source.parse[Source].get
     println(tree.structure)
     var methodParams = 0
+    var methodCount = 0
     tree.traverse {
       case defN: Defn.Def =>
+        methodCount += 1
         defN.traverse {
           case _: Term.Param =>
             methodParams += 1
         }
     }
-    methodParams
+    if (methodCount == 0) {
+      0
+    } else {
+      methodParams.toDouble / methodCount.toDouble
+    }
   }
 }

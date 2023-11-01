@@ -16,4 +16,14 @@ class AverageNumberOfArgumentsTest extends AnyFunSuite {
     val source = readSource("NoMethods")
     AverageNumberOfArguments.evaluate(source) shouldEqual 0
   }
+
+  test("AverageNumberOfArguments.evaluate.OneMethodNoArgs") {
+    val source = readSource("OneMethodNoArgs")
+    AverageNumberOfArguments.evaluate(source) shouldEqual 0
+  }
+
+  test("AverageNumberOfArguments.evaluate.OneMethodManyArgs") {
+    val source = readSource("OneMethodManyArgs")
+    AverageNumberOfArguments.evaluate(source) shouldEqual 3
+  }
 }
